@@ -8,7 +8,9 @@ const savedSettings = localStorage.getItem("videoplayer-current-time");
 const parsedSettings = JSON.parse(savedSettings);
 
 
-player.setCurrentTime(parsedSettings);
+if (parsedSettings) {
+  player.setCurrentTime(parsedSettings);
+}
 
 player.on('timeupdate', throttle(saveCurrentTimeVideo, 1000));
 
