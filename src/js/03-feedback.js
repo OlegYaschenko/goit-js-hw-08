@@ -4,6 +4,7 @@ const refs = {
   form: document.querySelector('.feedback-form'),
 }
 const STORAGE_KEY = "feedback-form-state";
+const getStorageKey = JSON.parse(localStorage.getItem(STORAGE_KEY));
 
 refs.form.addEventListener('submit', getSubmitValue);
 refs.form.addEventListener('input', throttle(onFeedbackFornInput, 500));
@@ -13,8 +14,10 @@ let formData = {};
 recoveryFormValue();
 
 function recoveryFormValue() { 
-  const savedValue = JSON.parse(localStorage.getItem(STORAGE_KEY));
-  formData = JSON.parse(localStorage.getItem(STORAGE_KEY));
+  if (getStorageKey) {
+    formData = getStorageKey;
+  }
+  const savedValue = getStorageKey;
   if (!savedValue) {
     return
   }
